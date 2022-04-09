@@ -15,7 +15,7 @@ export class OrderItemOrmEntity {
   @Column()
   unitPrice: number;
 
-  @ManyToOne((type) => OrderOrmEntity, (order) => order.orderItems, { onDelete: 'CASCADE' })
+  @ManyToOne(() => OrderOrmEntity, (order) => order.orderItems, { onDelete: 'CASCADE' })
   order: OrderOrmEntity;
 
   @DeleteDateColumn()

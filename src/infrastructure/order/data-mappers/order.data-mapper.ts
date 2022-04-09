@@ -1,16 +1,16 @@
+import { injectable } from 'inversify';
 import { Order } from '@domain/order/order';
 import { IOrderDataMapper } from '@domain/order/order-data-mapper.interface';
 import { OrderItem } from '@domain/order/order-item';
-import { injectable } from 'inversify';
-import { OrderOrmEntity } from '../orm-entities/order.entity';
 import { OrderItemOrmEntity } from '../orm-entities/order-item.entity';
+import { OrderOrmEntity } from '../orm-entities/order.entity';
 
 @injectable()
 export class OrderDataMapper implements IOrderDataMapper {
   toDomain(dalEntity: OrderOrmEntity): Order {
     const orderItems: OrderItem[] = dalEntity.orderItems.map(
-            (item: OrderItemOrmEntity) =>
-                new OrderItem({ sku: item.sku, quantity: item.quantity, unitPrice: item.unitPrice }, item.id)
+      (item: OrderItemOrmEntity) =>
+        new OrderItem({ sku: item.sku, quantity: item.quantity, unitPrice: item.unitPrice }, item.id)
     );
     const entity: Order = new Order({ customerId: dalEntity.customerId, orderItems }, dalEntity.id);
     return entity;

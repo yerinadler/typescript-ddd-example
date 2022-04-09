@@ -6,6 +6,7 @@ extends:
   - 'plugin:@typescript-eslint/recommended'
   - 'plugin:prettier/recommended'
   - 'plugin:import/recommended'
+  - 'plugin:import/typescript'
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: latest
@@ -19,6 +20,10 @@ rules:
   indent:
     - error
     - 2
+    - SwitchCase: 1
+      ignoredNodes:
+        - PropertyDefinition
+
   linebreak-style:
     - error
     - unix

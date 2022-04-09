@@ -1,7 +1,7 @@
-import { OrderDataMapper } from '@infrastructure/order/data-mappers/order.data-mapper';
-import { OrderRepository } from '@infrastructure/order/repositories/order.repository';
 import { Container } from 'inversify';
 import { Connection } from 'typeorm';
+import { OrderDataMapper } from '@infrastructure/order/data-mappers/order.data-mapper';
+import { OrderRepository } from '@infrastructure/order/repositories/order.repository';
 import config from './config';
 import { DI_TOKENS } from './di-tokens';
 import { createTypeOrmConnection } from './infrastructure/db/typeorm';

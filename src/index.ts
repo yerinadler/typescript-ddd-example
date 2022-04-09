@@ -2,10 +2,9 @@ import 'module-alias/register';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import 'reflect-metadata';
-import { createAsync } from './inversify.config';
 import { IOrderRepository } from '@domain/order/order-repository.interface';
 import { DI_TOKENS } from './di-tokens';
-import { Order } from './domain/order/order';
+import { createAsync } from './inversify.config';
 
 (async () => {
   const container = await createAsync();

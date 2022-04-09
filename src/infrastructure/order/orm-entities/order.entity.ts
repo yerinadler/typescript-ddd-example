@@ -1,19 +1,21 @@
-import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { OrderItemOrmEntity } from './order-item.entity';
 
 @Entity({ name: 'orders' })
 export class OrderOrmEntity {
   @PrimaryColumn('uuid')
-      id: Guid;
+  id: Guid;
 
   @Column()
-      customerId: Guid;
+  customerId: Guid;
 
-  @OneToMany((type) => OrderItemOrmEntity, (orderItem) => orderItem.order, {
-      { eager: true, cascade: true, onDelete: 'CASCADE' }
+  @OneToMany(() => OrderItemOrmEntity, (orderItem) => orderItem.order, {
+    eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
-      orderItems: OrderItemOrmEntity[];
+  orderItems: OrderItemOrmEntity[];
 
   @DeleteDateColumn()
-      deletedAt?: Date;
+  deletedAt?: Date;
 }
