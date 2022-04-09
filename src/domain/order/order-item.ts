@@ -1,25 +1,18 @@
-import { IEntity } from "@src/core/entity.interface";
-import { v4 as uuid } from 'uuid';
+import { Entity } from '@core/entity';
 
 export interface IOrderItemProps {
-  sku: string,
-  unitPrice: number,
-  quantity: number
+  sku: string;
+  unitPrice: number;
+  quantity: number;
 }
 
-export class OrderItem implements IEntity {
-
-  public readonly id: Guid;
+export class OrderItem extends Entity {
   private _sku: string;
   private _quantity: number;
   private _unitPrice: number;
 
-
-  constructor(
-    props: IOrderItemProps,
-    id?: Guid
-  ) {
-    this.id = id || uuid();
+  constructor(props: IOrderItemProps, id?: Guid) {
+    super(id);
     this._sku = props.sku;
     this._unitPrice = props.unitPrice;
     this._quantity = props.quantity;

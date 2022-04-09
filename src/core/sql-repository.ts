@@ -1,11 +1,11 @@
-import { injectable, unmanaged } from "inversify";
-import { Repository as TypeormRepository } from "typeorm";
-import { AggrgeateRoot } from "./aggregate-root";
-import { IDataMapper } from "./data-mapper.interface";
-import { IRepository } from "./repository.interface";
+import { injectable, unmanaged } from 'inversify';
+import { Repository as TypeormRepository } from 'typeorm';
+import { IAggregateRoot } from './aggregate-root.interface';
+import { IDataMapper } from './data-mapper.interface';
+import { IRepository } from './repository.interface';
 
 @injectable()
-export class SqlRepository<TDomainEntity extends AggrgeateRoot, TDalEntity> implements IRepository<TDomainEntity> {
+export class SqlRepository<TDomainEntity extends IAggregateRoot, TDalEntity> implements IRepository<TDomainEntity> {
   constructor(
     @unmanaged() private readonly _ormRepository: TypeormRepository<TDalEntity>,
     @unmanaged() private readonly _dataMapper: IDataMapper<TDomainEntity, TDalEntity>
@@ -17,7 +17,7 @@ export class SqlRepository<TDomainEntity extends AggrgeateRoot, TDalEntity> impl
   }
 
   async getById(id: Guid): Promise<TDomainEntity> {
-    const dbResult = await this._ormRepository.findOne(id) as TDalEntity;
+    const dbResult = (await this._ormRepository.findOne(id)) as TDalEntity;
     return this._dataMapper.toDomain(dbResult);
   }
 
@@ -26,7 +26,7 @@ export class SqlRepository<TDomainEntity extends AggrgeateRoot, TDalEntity> impl
     await this._ormRepository.save(dalObject as any);
   }
 
-  async remove(aggregateRoot: TDomainEntity): Promise<void> {
-    await this._ormRepository.softDelete(aggregateRoot.id);
+  async remove(id: Guid): Promise<void> {
+    await this._ormRepository.softDelete(id);
   }
 }

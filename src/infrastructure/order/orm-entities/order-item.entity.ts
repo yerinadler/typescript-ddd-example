@@ -1,5 +1,5 @@
-import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { OrderOrmEntity } from "./order.entity";
+import { Column, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { OrderOrmEntity } from './order.entity';
 
 @Entity({ name: 'order_items' })
 export class OrderItemOrmEntity {
@@ -15,7 +15,7 @@ export class OrderItemOrmEntity {
   @Column()
   unitPrice: number;
 
-  @ManyToOne(type => OrderOrmEntity, order => order.orderItems, { onDelete: 'CASCADE' })
+  @ManyToOne((type) => OrderOrmEntity, (order) => order.orderItems, { onDelete: 'CASCADE' })
   order: OrderOrmEntity;
 
   @DeleteDateColumn()

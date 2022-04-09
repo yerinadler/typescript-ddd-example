@@ -6,7 +6,6 @@ import config from './config';
 import { DI_TOKENS } from './di-tokens';
 import { createTypeOrmConnection } from './infrastructure/db/typeorm';
 
-
 export const createAsync = async () => {
   const container = new Container();
 
@@ -18,4 +17,4 @@ export const createAsync = async () => {
   container.bind(DI_TOKENS.ORDER_REPOSITORY).to(OrderRepository).inSingletonScope();
 
   return container;
-}
+};

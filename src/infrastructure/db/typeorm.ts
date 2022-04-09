@@ -1,8 +1,8 @@
-import { Order } from "@src/domain/order/order";
-import { OrderItem } from "@src/domain/order/order-item";
-import { createConnection } from "typeorm";
-import { OrderItemOrmEntity } from "../order/orm-entities/order-item.entity";
-import { OrderOrmEntity } from "../order/orm-entities/order.entity";
+import { Order } from '@src/domain/order/order';
+import { OrderItem } from '@src/domain/order/order-item';
+import { createConnection } from 'typeorm';
+import { OrderItemOrmEntity } from '../order/orm-entities/order-item.entity';
+import { OrderOrmEntity } from '../order/orm-entities/order.entity';
 
 export const createTypeOrmConnection = async (
   host: string,
@@ -12,16 +12,13 @@ export const createTypeOrmConnection = async (
   database: string
 ) =>
   createConnection({
-    type: "postgres",
+    type: 'postgres',
     host,
     port,
     username,
     password,
     database,
-    entities: [
-      OrderOrmEntity,
-      OrderItemOrmEntity
-    ],
+    entities: [OrderOrmEntity, OrderItemOrmEntity],
     synchronize: true,
-    logging: false
+    logging: false,
   });

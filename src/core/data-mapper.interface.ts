@@ -1,6 +1,6 @@
-import { AggrgeateRoot } from "./aggregate-root";
+import { IAggregateRoot } from './aggregate-root.interface';
 
-export interface IDataMapper<TAggregateRoot extends AggrgeateRoot, TDalEntity> {
+export interface IDataMapper<TAggregateRoot extends IAggregateRoot, TDalEntity> {
   toDomain(dalEntity: TDalEntity): TAggregateRoot;
   toPersistence(entity: TAggregateRoot): TDalEntity;
 }
