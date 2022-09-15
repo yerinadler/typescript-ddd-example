@@ -1,6 +1,4 @@
 import { createConnection } from 'typeorm';
-import { Order } from '@src/domain/order/order';
-import { OrderItem } from '@src/domain/order/order-item';
 import { OrderItemOrmEntity } from '../order/orm-entities/order-item.entity';
 import { OrderOrmEntity } from '../order/orm-entities/order.entity';
 

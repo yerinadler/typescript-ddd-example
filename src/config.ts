@@ -1,4 +1,5 @@
 export default {
+  port: process.env.PORT || 3000,
   postgres: {
     host: process.env.POSTGRES_HOST || 'localhost',
     port: process.env.POSTGRES_PORT || 5432,
