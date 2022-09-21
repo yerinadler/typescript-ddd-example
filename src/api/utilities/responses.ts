@@ -6,3 +6,11 @@ export function ok(message: string, data: any) {
     data,
   };
 }
+
+export function err(statusCode: string, message: string, error: any) {
+  return {
+    status: statusCode,
+    message,
+    error,
+  }
+}
