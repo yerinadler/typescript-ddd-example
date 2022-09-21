@@ -10,12 +10,14 @@ import { DI_TOKENS } from './di-tokens';
 import { createTypeOrmConnection } from './infrastructure/db/typeorm';
 
 import '@api/controllers';
+import { logger } from './infrastructure/logger/winston';
 
 export const createAsync = async () => {
   const container = new Container();
 
   const { host, port, username, password, database } = config.postgres;
   const dbConnection: Connection = await createTypeOrmConnection(host, +port, username, password, database);
+  container.bind(DI_TOKENS.LOGGER).toConstantValue(logger);
   container.bind(DI_TOKENS.DB_CONNECTION).toConstantValue(dbConnection);
   container.bind(DI_TOKENS.ORDER_DATA_MAPPER).to(OrderDataMapper).inSingletonScope();
   container.bind(DI_TOKENS.ORDER_REPOSITORY).to(OrderRepository).inSingletonScope();
@@ -25,7 +27,7 @@ export const createAsync = async () => {
   initialiseApiServer(server);
   const app = server.build();
   app.listen(config.port, () => {
-    console.log('The application is running on the port %s', config.port);
+    logger.info('The application is running on the port %s', config.port);
   });
 
   return container;

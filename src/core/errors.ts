@@ -1,6 +1,6 @@
 export class ApplicationError extends Error {
-  public readonly httpStatus: number;
-  public readonly statusCode: string;
+  public httpStatus: number;
+  public statusCode: string;
 
   constructor(httpStatus: number, statusCode: string, message: string) {
     super(message);
